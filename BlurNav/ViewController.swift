@@ -25,8 +25,14 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureView()
+    }
+    
+    func configureView() {
         headerBlurImageView.alpha = 0
         tableView.delegate = self
+        avatarImageView.layer.borderWidth = 1
+        avatarImageView.layer.borderColor = UIColor.white.cgColor
     }
     
     override func didReceiveMemoryWarning() {

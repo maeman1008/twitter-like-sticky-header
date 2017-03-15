@@ -85,6 +85,11 @@
                                                 <constraint firstAttribute="width" constant="70" id="NXt-8P-TO1"/>
                                                 <constraint firstAttribute="height" constant="70" id="jDu-Gh-cig"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ikaikaikaika" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tY5-gE-HZk">
                                             <rect key="frame" x="8" y="163" width="90" height="19.5"/>
