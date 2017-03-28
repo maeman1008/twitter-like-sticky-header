@@ -23,6 +23,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
     
     @IBOutlet weak var tableView: UITableView!
     
+    private let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureView()
@@ -33,6 +35,16 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
         tableView.delegate = self
         avatarImageView.layer.borderWidth = 1
         avatarImageView.layer.borderColor = UIColor.white.cgColor
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(ViewController.refreshData(sender:)), for: .valueChanged)
+
+    }
+    
+    func refreshData(sender: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.refreshControl.endRefreshing()
+        }
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,7 +62,13 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegat
             let headerSizevariation = ((headerView.bounds.height * (1.0 + headerScaleFactor)) - headerView.bounds.height) / 2.0
             headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
             headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
+
+            headerBlurImageView?.alpha = min (1.0, (-offset - headerLabelOffset) / headerLabelDistance)
             
+            if refreshControl.isRefreshing {
+                headerBlurImageView.alpha = 100
+            }
+
         } else {
             headerTransform = CATransform3DTranslate(headerTransform, 0, max(-headerStopOffset, -offset), 0)
             
